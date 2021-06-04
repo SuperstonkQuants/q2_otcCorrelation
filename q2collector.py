@@ -11,7 +11,7 @@ from io import StringIO
 filename = "output.csv"
 
 symbols = [ "GME" , "AMC", "KOSS", "NAKD", "BBBY", "NOK", "GM", "AAPL", "TSLA", "MSFT", "SPY", "SPXS" ]
-fields = ["issueSymbolIdentifier", "issueName", "totalWeeklyShareQuantity","totalWeeklyTradeCount","marketParticipantName","tierIdentifier","weekStartDate"]
+fields = ["issueSymbolIdentifier", "issueName", "totalWeeklyShareQuantity","totalWeeklyTradeCount","marketParticipantName","firmCRDNumber","MPID","tierIdentifier","weekStartDate"]
 
 def timing():
     start_time = time.time()
@@ -60,7 +60,7 @@ def price(finra):
     yf.pdr_override()
     df = finra
 
-    df = df.drop(columns=['issueName', 'totalWeeklyShareQuantity','totalWeeklyTradeCount','marketParticipantName','tierIdentifier'])
+    df = df.drop(columns=["issueName", "totalWeeklyShareQuantity","totalWeeklyTradeCount","marketParticipantName","tierIdentifier","firmCRDNumber","MPID"])
     df = df.sort_values(by=['issueSymbolIdentifier','weekStartDate'])
     df = df.drop_duplicates()
     symbols = df["issueSymbolIdentifier"].drop_duplicates()
